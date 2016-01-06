@@ -1,0 +1,111 @@
+<template name="employeesView">
+	<body>
+
+		{{>navbar}}
+		
+		<div class="container">
+			<div class="main-canvas col-md-offset-3 col-md-6">
+				<div class="jumbotron">
+					<h1>All the Employees</h1>
+					<p>The list below shows all the employees that we current have on the system</p>
+					<p><a class="btn btn-primary btn-lg" href="#" role="button" data-toggle="modal" data-target="#newEmployeeModal">Add Employees</a></p>
+				</div>
+				<ul class="list-group">
+					{{#each allEmployees}}
+					<li class="list-group-item">
+						<a class="openEditEmployeeModal" data-toggle="modal" data-target="#editEmployeeModal">
+							<span class="glyphicon glyphicon-pencil"></span>
+						</a>
+						Name: {{firstName}} {{lastName}}, Phone: {{phoneNum}}
+					</li>
+					{{/each}}
+				</ul>
+			</div>
+		</div>
+
+		<!-- newEmployeeModal -->
+		<div class="modal fade" id="newEmployeeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title" id="myModalLabel">Add New Employee</h4>
+					</div>
+					<div class="modal-body">
+						<form>
+							<div class="form-group">
+								<label for="first-name">First Name</label>
+								<input type="text" class="form-control" id="first-name" placeholder="John">
+							</div>
+							<div class="form-group">
+								<label for="last-name">Last Name</label>
+								<input type="text" class="form-control" id="last-name" placeholder="Smith">
+							</div>
+							<div class="form-group">
+								<label for="phone">Phone Number</label>
+								<input type="number" class="form-control" id="phone-num" placeholder="7789900405">
+							</div>
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						<button type="submit" id="addEmployee" class="btn btn-primary">Add</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- editEmployeeModal -->
+		<div class="modal fade" id="editEmployeeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title" id="myModalLabel">Edit Employee Info</h4>
+					</div>
+					<div class="modal-body">
+						<form>
+							<div class="form-group">
+								<label for="edit-first-name">First Name</label>
+								<input type="text" class="form-control" id="edit-first-name" value="{{currentEdit.firstName}}">
+							</div>
+							<div class="form-group">
+								<label for="edit-last-name">Last Name</label>
+								<input type="text" class="form-control" id="edit-last-name" value="{{currentEdit.lastName}}">
+							</div>
+							<div class="form-group">
+								<label for="edit-phone-num">Phone Number</label>
+								<input type="number" class="form-control" id="edit-phone-num" value="{{currentEdit.phoneNum}}">
+							</div>
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						<button type="submit" id="editEmployee" class="btn btn-primary">Update</button>
+						<button type="submit" class="btn btn-danger" data-toggle="modal" data-target="#removeWarningModal">Delete</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- removeWarningModal -->
+		<div class="modal fade" id="removeWarningModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title" id="myModalLabel">Warning</h4>
+					</div>
+					<div class="modal-body">
+						<p>Are you sure you want to delete {{currentEdit.lastName}}?</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary" data-dismiss="modal">No</button>
+						<button type="submit" id="removeEmployee" class="btn btn-danger">Yes</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+	</body>
+</template>
